@@ -1,0 +1,396 @@
+cc_defaults {
+    name: "boost_defaults",
+    vendor_available: true,
+    target: {
+        android: {
+        enabled: true,
+            cflags: [
+               // "-DUSE_FEC=1",
+            ],
+        },
+    },
+}
+
+cc_defaults {
+    name: "boost_headers_defaults",
+    defaults: ["boost_defaults"],
+}
+
+cc_defaults {
+    name: "boost_library_defaults",
+    defaults: ["boost_defaults"],
+
+    rtti: true,
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-fexceptions",
+//        "-DBOOST_THREAD_DONT_USE_CHRONO",
+//        "-DBOOST_THREAD_POSIX",
+        "-DBOOST_ASIO_HAS_STD_STRING_VIEW",
+    ],
+}
+
+cc_library_headers {
+    name: "libboost_headers",
+    defaults: ["boost_headers_defaults"],
+
+    export_include_dirs: [
+        "libs/accumulators/include",
+        "libs/algorithm/include",
+        "libs/align/include",
+        "libs/any/include",
+        "libs/array/include",
+        "libs/asio/include",
+        "libs/assert/include",
+        "libs/assign/include",
+        "libs/atomic/include",
+        "libs/beast/include",
+        "libs/bimap/include",
+        "libs/bind/include",
+        "libs/callable_traits/include",
+        "libs/chrono/include",
+        "libs/circular_buffer/include",
+        "libs/compatibility/include",
+        "libs/compute/include",
+        "libs/concept_check/include",
+        "libs/config/include",
+        "libs/container/include",
+        "libs/container_hash/include",
+        "libs/context/include",
+        "libs/conversion/include",
+        "libs/convert/include",
+        "libs/core/include",
+        "libs/coroutine/include",
+        "libs/coroutine2/include",
+        "libs/crc/include",
+        "libs/date_time/include",
+        "libs/detail/include",
+        "libs/disjoint_sets/include",
+        "libs/dll/include",
+        "libs/dynamic_bitset/include",
+        "libs/endian/include",
+        "libs/exception/include",
+        "libs/fiber/include",
+        "libs/filesystem/include",
+        "libs/flyweight/include",
+        "libs/foreach/include",
+        "libs/format/include",
+        "libs/function/include",
+        "libs/functional/include",
+        "libs/function_types/include",
+        "libs/fusion/include",
+        "libs/geometry/include",
+        "libs/gil/include",
+        "libs/graph/include",
+        "libs/graph_parallel/include",
+        "libs/hana/include",
+        "libs/heap/include",
+        "libs/icl/include",
+        "libs/integer/include",
+        "libs/interprocess/include",
+        "libs/intrusive/include",
+        "libs/io/include",
+        "libs/iostreams/include",
+        "libs/iterator/include",
+        "libs/lambda/include",
+        "libs/lexical_cast/include",
+        "libs/locale/include",
+        "libs/local_function/include",
+        "libs/lockfree/include",
+        "libs/log/include",
+        "libs/logic/include",
+        "libs/math/include",
+        "libs/metaparse/include",
+        "libs/move/include",
+        "libs/mp11/include",
+        "libs/mpi/include",
+        "libs/mpl/include",
+        "libs/msm/include",
+        "libs/multi_array/include",
+        "libs/multi_index/include",
+        "libs/multiprecision/include",
+        "libs/numeric/conversion/include",
+        "libs/numeric/interval/include",
+        "libs/numeric/odeint/include",
+        "libs/numeric/ublas/include",
+        "libs/optional/include",
+        "libs/parameter/include",
+        "libs/phoenix/include",
+        "libs/poly_collection/include",
+        "libs/polygon/include",
+        "libs/pool/include",
+        "libs/predef/include",
+        "libs/preprocessor/include",
+        "libs/process/include",
+        "libs/program_options/include",
+        "libs/property_map/include",
+        "libs/property_tree/include",
+        "libs/proto/include",
+        "libs/ptr_container/include",
+        "libs/python/include",
+        "libs/qvm/include",
+        "libs/random/include",
+        "libs/range/include",
+        "libs/ratio/include",
+        "libs/rational/include",
+        "libs/regex/include",
+        "libs/scope_exit/include",
+        "libs/serialization/include",
+        "libs/signals2/include",
+        "libs/smart_ptr/include",
+        "libs/sort/include",
+        "libs/spirit/include",
+        "libs/stacktrace/include",
+        "libs/statechart/include",
+        "libs/static_assert/include",
+        "libs/system/include",
+        "libs/test/include",
+        "libs/thread/include",
+        "libs/throw_exception/include",
+        "libs/timer/include",
+        "libs/tokenizer/include",
+        "libs/tti/include",
+        "libs/tuple/include",
+        "libs/type_erasure/include",
+        "libs/type_index/include",
+        "libs/typeof/include",
+        "libs/type_traits/include",
+        "libs/units/include",
+        "libs/unordered/include",
+        "libs/utility/include",
+        "libs/uuid/include",
+        "libs/variant/include",
+        "libs/vmd/include",
+        "libs/wave/include",
+        "libs/winapi/include",
+        "libs/xpressive/include",
+    ]
+}
+
+cc_library {
+    name: "libboost_chrono",
+    defaults: ["boost_library_defaults"],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    shared: {
+        shared_libs: [
+            "libboost_system",
+        ],
+    },
+
+    srcs : [
+        "libs/chrono/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/chrono/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_date_time",
+    defaults: ["boost_library_defaults"],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    srcs : [
+        "libs/date_time/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/date_time/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_filesystem",
+    defaults: ["boost_library_defaults"],
+
+    //FIXME: build workaround
+    cflags: [
+        "-Wno-deprecated-declarations",
+        "-Wno-non-virtual-dtor",
+        "-Wno-unused-parameter",
+    ],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    shared: {
+        shared_libs: [
+            "libboost_system",
+        ],
+    },
+
+    srcs : [
+        "libs/filesystem/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/filesystem/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_log",
+    defaults: ["boost_library_defaults"],
+
+    //FIXME: build workaround
+    cflags: [
+        "-Wno-implicit-fallthrough",
+        "-Wno-non-virtual-dtor",
+        "-Wno-unused-parameter",
+    ],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    shared: {
+        shared_libs: [
+            "libboost_thread",
+            "libboost_filesystem",
+            "libboost_regex",
+            "libboost_system",
+        ],
+    },
+
+    srcs : [
+        "libs/log/src/**/*.cpp",
+    ],
+
+    exclude_srcs : [
+        "libs/log/src/dump_ssse3.cpp",
+        "libs/log/src/dump_avx2.cpp",
+        "libs/log/src/windows/*.cpp"
+    ],
+
+    local_include_dirs : [
+        "libs/log/src",
+        "libs/log/src/posix",
+        "libs/log/src/setup",
+        "libs/log/src/windows",
+    ],
+
+    export_include_dirs: ["libs/log/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_program_options",
+    defaults: ["boost_library_defaults"],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    srcs : [
+        "libs/program_options/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/program_options/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_regex",
+    defaults: ["boost_library_defaults"],
+
+    //FIXME: build workaround
+    cflags: [
+        "-Wno-implicit-fallthrough",
+    ],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    srcs : [
+        "libs/regex/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/regex/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_system",
+    defaults: ["boost_library_defaults"],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    srcs : [
+        "libs/system/src/**/*.cpp",
+    ],
+
+    export_include_dirs: ["libs/system/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
+
+cc_library {
+    name: "libboost_thread",
+    defaults: ["boost_library_defaults"],
+
+    //FIXME: build workaround
+    cflags: [
+        "-Wno-non-virtual-dtor",
+    ],
+
+    header_libs: [
+        "libboost_headers",
+    ],
+
+    shared: {
+        shared_libs: [
+            "libboost_system",
+        ],
+    },
+
+    srcs : [
+        "libs/thread/src/**/*.cpp",
+    ],
+
+    exclude_srcs : [
+        "libs/thread/src/win32/*.cpp",
+        "libs/thread/src/pthread/once_atomic.cpp",
+    ],
+
+    local_include_dirs : [
+        "libs/thread/src",
+        "libs/thread/src/pthread",
+    ],
+
+    export_include_dirs: ["libs/thread/include"],
+
+    export_header_lib_headers: [
+        "libboost_headers",
+    ],
+}
